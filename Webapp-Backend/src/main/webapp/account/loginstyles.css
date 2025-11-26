@@ -2,7 +2,7 @@
   --thin: 100;
   --regular: 400;
   --medium: 500;
-  --semi-bold:600;
+  --semi-bold: 600;
   --bold: 700;
   --black: 900;
 
@@ -35,8 +35,8 @@ body.darkmode {
 }
 
 body.darkmode .form-control::placeholder {
-    color: #cccccc !important; /* lighter gray for good contrast */
-    opacity: 1; /* ensures the color is applied in all browsers */
+  color: #cccccc !important;
+  opacity: 1;
 }
 
 body.darkmode .login-card {
@@ -92,7 +92,6 @@ body {
   padding: 1rem;
 }
 
-
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -114,20 +113,19 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.1); /* Light overlay by default */
+  background: rgba(255, 255, 255, 0.1);
   transition: background 0.3s ease;
   z-index: 0;
 }
 
 .login-card {
   position: relative;
-  z-index: 1; /* Make sure card is above overlay */
+  z-index: 1;
 }
 
 .login-container::before {
-  background: rgba(0, 0, 0, 0.55); /* Darker overlay for dark mode */
+  background: rgba(0, 0, 0, 0.55);
 }
-
 
 .login-card {
   background-color: rgba(255, 255, 255, 0.95);
@@ -138,26 +136,45 @@ body {
   width: 100%;
 }
 
+/* Added background image to signup page to match login page */
 .signup-body {
+  background-image: url("https://images.splitshire.com/full/The-Modern-Minimalist-House-Amidst-Greenery_YANQH.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  position: relative;
+}
+
+.signup-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
 }
 
 .signup-container {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   padding: 2rem 0;
-  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .signup-card {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   padding: 2.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   max-width: 600px;
   margin: 2rem auto;
+}
+
+html{
+	height: 100vh;
+}
+body{
+	height: 100%
 }
 
 .card-title {
@@ -217,8 +234,6 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
-
 
 .btn-primary {
   background-color: var(--primary-color) !important;

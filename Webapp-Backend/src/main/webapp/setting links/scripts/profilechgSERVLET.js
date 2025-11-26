@@ -12,14 +12,14 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("age").value = userAge
   }
 
-  console.log("[v0] Loaded profile data from localStorage")
+  console.log(" Loaded profile data from localStorage")
 })
 
 
 document.getElementById("profile-form").addEventListener("submit", async (e) => {
   e.preventDefault()
 
-  console.log("[v0] Profile form submitted")
+  console.log("Profile form submitted")
 
   const fullName = document.getElementById("full-name").value.trim()
   const age = document.getElementById("age").value.trim()
@@ -29,7 +29,7 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
     return
   }
 
-  console.log("[v0] Sending to backend:", { fullName, age })
+  console.log("Sending to backend:", { fullName, age })
 
   try {
     const response = await fetch("/Webapp-Backend/editProfile", {
@@ -42,7 +42,7 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
     })
 
     const data = await response.json()
-    console.log("[v0] Backend response:", data) //just needed to track in console if connected to js and servlet
+    console.log(" Backend response:", data) //just needed to track in console if connected to js and servlet
  
     if (data.status === "success") {
 
@@ -57,9 +57,9 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
       alert(data.message || "Failed to update profile")
     }
   } catch (error) {
-    console.error("[v0] Update error:", error)
+    console.error(" Update error:", error)
     alert("An error occurred while updating profile")
   }
 })
 
-console.log("[v0] Event listener attached to profile-form")
+console.log("Event listener attached to profile-form")

@@ -10,6 +10,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     return
   }
 
+  
   try {
     const response = await fetch("/Webapp-Backend/signup", {
       method: "POST",
@@ -29,6 +30,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
       localStorage.setItem("userFullName", data.user.fullName)
       localStorage.setItem("userAge", data.user.age)
 
+
       alert("Registration submitted successfully!")
 
       // Redirect to dashboard
@@ -40,6 +42,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     console.error("Signup error:", error)
     alert("An error occurred during signup")
   }
+
 })
 
 function validateForm(fullName, email, age, password) {

@@ -240,3 +240,35 @@ body.darkmode #theme-switch svg:last-child {
 .bottom-nav-item:hover {
   color: var(--primary-color);
 }
+
+.delete-account-item {
+  cursor: default;
+}
+
+.delete-account-item:hover {
+  background-color: var(--bg-white);
+}
+
+.delete-account-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  font-size: 14pt;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.delete-account-btn:hover {
+  background-color: #b91c1c;
+}
+
+.delete-account-btn i {
+  font-size: 16pt;
+}

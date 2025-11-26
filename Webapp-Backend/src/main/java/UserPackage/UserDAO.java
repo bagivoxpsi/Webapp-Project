@@ -25,6 +25,9 @@ public class UserDAO {
     private static final String CHECK_EMAIL_EXISTS =
         "SELECT COUNT(*) FROM users WHERE email = ? AND id != ?";
     
+    private static final String DELETE_USER =
+        "DELETE FROM users WHERE id = ?";
+    
     private static final String URL = "jdbc:mysql://localhost:3306/smart_home";
     private static final String USER = "root";
     private static final String PASSWORD = "0000";
@@ -32,7 +35,6 @@ public class UserDAO {
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-
 
     public void registerUser(User user) throws Exception {
         try (Connection conn = getConnection();
@@ -110,7 +112,6 @@ public class UserDAO {
         System.out.println("[v0] updateUserEmail called - userId: " + userId + ", newEmail: " + newEmail);
         
         try (Connection conn = getConnection()) {
-            // Check if email already exists
             try (PreparedStatement checkStmt = conn.prepareStatement(CHECK_EMAIL_EXISTS)) {
                 checkStmt.setString(1, newEmail);
                 checkStmt.setInt(2, userId);
@@ -122,7 +123,6 @@ public class UserDAO {
                 }
             }
 
-            // Update the email
             try (PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_EMAIL)) {
                 stmt.setString(1, newEmail);
                 stmt.setInt(2, userId);
@@ -138,7 +138,6 @@ public class UserDAO {
         System.out.println("[v0] updateUserPassword called - userId: " + userId);
         
         try (Connection conn = getConnection()) {
-            // Verify old password
             try (PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_ID)) {
                 stmt.setInt(1, userId);
                 ResultSet rs = stmt.executeQuery();
@@ -157,7 +156,6 @@ public class UserDAO {
                 }
             }
 
-            // Update the password
             try (PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_PASSWORD)) {
                 stmt.setString(1, newPassword);
                 stmt.setInt(2, userId);
@@ -166,6 +164,25 @@ public class UserDAO {
                 System.out.println("[v0] Password update - rows affected: " + rowsAffected);
                 return rowsAffected > 0;
             }
+        }
+    }
+    
+    public boolean deleteUser(int userId) {
+        System.out.println("[v0] deleteUser called - userId: " + userId);
+        
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(DELETE_USER)) {
+            
+            stmt.setInt(1, userId);
+            int rowsAffected = stmt.executeUpdate();
+            
+            System.out.println("[v0] User deletion - rows affected: " + rowsAffected);
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("[v0] Error deleting user: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 }

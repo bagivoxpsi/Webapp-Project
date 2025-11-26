@@ -54,6 +54,7 @@ async function submitAddress(event) {
 
 	console.log({ userId, address: addressText });
 	
+	console.log("userId before fetch:", userId)
     try {
         if (editingAddress) {
             const addressId = editingAddress.dataset.id;
