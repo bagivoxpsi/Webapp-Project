@@ -1,4 +1,4 @@
-package com.example.webapp.servlet;
+package com.webapp.servlet;
 
 import com.example.webapp.model.User;
 import java.io.*;

@@ -1,13 +1,13 @@
-package ProfilePackage;
+package DashboardPackage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/smart_home_dashboard";
-    private static final String USERNAME = "your_mysql_username";
-    private static final String PASSWORD = "your_mysql_password";
+    private static final String URL = "jdbc:mysql://localhost:3306/smart_home";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "0000";
     
     public static Connection getConnection() throws SQLException {
         try {

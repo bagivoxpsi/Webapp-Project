@@ -1,4 +1,4 @@
-package ProfilePackage;
+package DashboardPackage;
 
 public class DashboardStats {
     private int totalDevices;
@@ -8,7 +8,20 @@ public class DashboardStats {
     private double temperatureAvg;
     private double dailySavings;
     
-    // Add getters and setters for the new fields
+    // Constructors
+    public DashboardStats() {}
+    
+    public DashboardStats(int totalDevices, int onlineDevices, double energyConsumption, 
+                         int securityEvents, double temperatureAvg, double dailySavings) {
+        this.totalDevices = totalDevices;
+        this.onlineDevices = onlineDevices;
+        this.energyConsumption = energyConsumption;
+        this.securityEvents = securityEvents;
+        this.temperatureAvg = temperatureAvg;
+        this.dailySavings = dailySavings;
+    }
+    
+    // Getters and setters
     public int getTotalDevices() { return totalDevices; }
     public void setTotalDevices(int totalDevices) { this.totalDevices = totalDevices; }
     
@@ -26,6 +39,4 @@ public class DashboardStats {
     
     public double getDailySavings() { return dailySavings; }
     public void setDailySavings(double dailySavings) { this.dailySavings = dailySavings; }
-    
-    
 }
