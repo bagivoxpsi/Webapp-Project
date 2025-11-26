@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="styles/styles-general.css">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="styles/styles-profile.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <!-- TOP NAVBAR -->
+    <nav
+        class="navbar navbar-top fixed-top pt-3 shadow-sm px-4">
+
+        <button class="sidebar-button" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+            aria-controls="sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <select class="nav-item" id="address-selector">
+        
+        </select>
+
+        <a class="nav-item nav-link" href="settings.html">
+            <i class="fa fa-gear"></i>
+        </a>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar"
+        aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset"
+                data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body pt-0">
+            <div class="sidebar-content-wrapper">
+                <div class="sidebar-top">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link d-flex justify-content-between align-items-center"
+                                data-bs-toggle="collapse" href="#security-group"
+                                role="button" aria-expanded="false">
+
+                                <div>
+                                    <i class="fa fa-lock"></i>
+                                    Security
+                                </div>
+
+                                <i
+                                    class="fa fa-chevron-down transition-icon"></i>
+                            </a>
+                            <div class="collapse" id="security-group">
+                                <ul class="navbar-nav ps-3">
+                                    <li class="nav-item"><a class="nav-link"
+                                            href="sidebar-links/guests.html">Guests</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link d-flex justify-content-between align-items-center"
+                                data-bs-toggle="collapse" href="#homes-group"
+                                role="button" aria-expanded="false">
+
+                                <div>
+                                    <i class="fa fa-house-user"></i>
+                                    Homes
+                                </div>
+
+                                <i
+                                    class="fa fa-chevron-down transition-icon"></i>
+                            </a>
+                            <div class="collapse" id="homes-group">
+                                <ul class="navbar-nav ps-3">
+                                    <li class="nav-item"><a class="nav-link"
+                                            href="sidebar-links/addresses.html">Addresses</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.html">
+                                <i class="fa fa-sliders"></i>
+                                Preferences
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="sidebar-links/extensions.html">
+                                <i class="fa fa-puzzle-piece"></i>
+                                Extensions
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="sidebar-bottom">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">
+                                <i class="fa fa-right-from-bracket"></i>
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVBAR -->
+    <nav class="navbar fixed-bottom pt-3 shadow-lg">
+        <a class="nav-item nav-link bottom-nav-item" href="home.html">
+            <i class="fa fa-home"></i>
+            <label>Home</label>
+        </a>
+        <a class="nav-item nav-link bottom-nav-item" href="dashboard.html">
+            <i class="fa fa-dashboard"></i>
+            <label>Dashboard</label>
+        </a>
+        <a class="nav-item nav-link bottom-nav-item" href="tasks.html">
+            <i class="fa fa-tasks"></i>
+            <label>Tasks</label>
+        </a>
+        <a class="nav-item nav-link bottom-nav-item" href="profile.html">
+            <i class="fa fa-user-circle"></i>
+            <label>Profile</label>
+        </a>
+    </nav>
+
+    <!-- Implementation starts here, previous code is for top and bottom nav.
+         Keep implementation inside the <div class="content-wrapper"> tag,
+         Otherwise navbar will block parts of the implementation            -->
+    <body>
+        <div class="content-wrapper">
+            <div class="text-center mt-5 pt-4">
+                <!-- Profile Picture with Upload -->
+                <div class="mb-3">
+                    <img id="profileImage" src="images/profile-picture.png" alt="Profile Picture"
+                        class="rounded-circle" width="120" height="120">
+                    
+                    <!-- Hidden file input -->
+                    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                    
+                    <!-- Upload button -->
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('imageFileInput').click()">
+                            <i class="fa fa-camera me-1"></i>Change Photo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Username with Edit Pencil -->
+                <div class="mb-4">
+                    <div
+                        class="username-container d-flex justify-content-center align-items-baseline">
+                        <h3 class="username">Horizon_User</h3>
+                        <i id="edit-icon" class="fa fa-edit ms-2"></i>
+                    </div>
+                </div>
+
+                <!-- Saved Addresses Collapse Menu -->
+                <div class="mb-4">
+                    <div class="saved-addresses-container d-flex justify-content-center align-items-baseline mb-3">
+                        <h5 class="mb-0">Saved Addresses</h5>
+                        <i class="fa fa-pencil ms-2" style="color:inherit;"></i>
+                    </div>
+                    
+                    <!-- Collapse menu for addresses -->
+                    <div class="collapse-addresses">
+                        <button class="btn btn-outline-secondary btn-sm w-100 mb-2" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#addressCollapse" 
+                                aria-expanded="false" 
+                                aria-controls="addressCollapse">
+                            <i class="fa fa-chevron-down me-1"></i> View All Addresses
+                        </button>
+                        
+                        <div class="collapse" id="addressCollapse">
+                            <div class="card card-body" id="addresses-container" style="max-height: 200px; overflow-y: auto;">
+                                <!-- Addresses will be loaded here by JavaScript -->
+                                <div class="text-muted">Loading addresses...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div>
+                    <a href="account/login.html"
+                        class="btn btn-primary me-2 switch-btn">
+                        <i class="fa fa-exchange-alt me-1"></i>Switch Account
+                    </a>
+                    <button class="btn btn-danger logout-btn">
+                        <i class="fa fa-sign-out-alt me-1"></i>Log Out
+                    </button>
+                </div>
+            </div>
+        </div>
+        	<script src="address-selector.js"></script>
+        <script src="darkmode.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const usernameElement = document.querySelector('.username');
+            const switchBtn = document.querySelector('.switch-btn');
+            const logoutBtn = document.querySelector('.logout-btn');
+            let loginName = localStorage.getItem("userFullName");
+            const editIcon = document.getElementById("edit-icon");        
+
+            if (!loginName || loginName.trim() === "") {
+                loginName = "Horizon User";
+                localStorage.setItem("userFullName", loginName);
+            }
+            usernameElement.textContent = loginName;
+
+            const editUsername = () => {
+                const currentName = usernameElement.textContent.trim();
+                const newName = prompt('Enter new username:', currentName);
+                if (newName && newName.trim() !== '') {
+                    // Call your update username servlet
+                    fetch('/Webapp-Backend/update-username', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'newUsername=' + encodeURIComponent(newName.trim())
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            localStorage.setItem("userFullName", newName.trim());
+                            usernameElement.textContent = newName.trim();
+                            alert('Username updated successfully!');
+                        } else {
+                            alert('Failed to update username.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error updating username.');
+                    });
+                }
+            };
+            
+            usernameElement.addEventListener('click', editUsername);
+            editIcon.addEventListener('click', editUsername);
+
+            usernameElement.style.cursor = 'pointer';
+            editIcon.style.cursor = 'pointer';
+
+            // Profile picture upload functionality
+            const profileImage = document.getElementById('profileImage');
+            const imageFileInput = document.getElementById('imageFileInput');
+            
+            imageFileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select an image file.');
+                        return;
+                    }
+                    
+                    // Validate file size (5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size must be less than 5MB.');
+                        return;
+                    }
+                    
+                    // Show preview
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                    
+                    // Upload to server
+                    uploadProfilePicture(file);
+                }
+            });
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to log out?')) {
+                    // Call your logout servlet
+                    fetch('/Webapp-Backend/logout', {
+                        method: 'GET'
+                    })
+                    .then(response => {
+                        // Clear localStorage
+                        localStorage.removeItem('userFullName');
+                        // Redirect will happen automatically from servlet
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Fallback redirect
+                        window.location.href = 'account/login.html';
+                    });
+                }
+            });
+
+            // Load addresses when page loads
+            loadAddresses();
+        });
+
+        // Function to upload profile picture to server
+        function uploadProfilePicture(file) {
+            const formData = new FormData();
+            formData.append('imageFile', file);
+            
+            fetch('/Webapp-Backend/update-profile-picture', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Profile picture updated successfully!');
+                } else {
+                    alert('Failed to update profile picture.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating profile picture.');
+            });
+        }
+
+        // Load addresses from server
+        function loadAddresses() {
+            fetch('/Webapp-Backend/getAddresses')
+            .then(response => response.json())
+            .then(addresses => {
+                displayAddresses(addresses);
+            })
+            .catch(error => {
+                console.error('Error loading addresses:', error);
+                document.getElementById('addresses-container').innerHTML = 
+                    '<div class="text-danger">Error loading addresses</div>';
+            });
+        }
+
+        // Display addresses in collapse menu
+        function displayAddresses(addresses) {
+            const container = document.getElementById('addresses-container');
+            
+            if (!addresses || addresses.length === 0) {
+                container.innerHTML = '<div class="text-muted">No addresses saved</div>';
+                return;
+            }
+            
+            container.innerHTML = addresses.map(address => `
+                <div class="address-item border-bottom pb-2 mb-2">
+                    <strong>${address.addressType || 'Address'}</strong><br>
+                    ${address.street || ''}<br>
+                    ${address.city || ''}, ${address.state || ''} ${address.zipCode || ''}
+                </div>
+            `).join('');
+        }
+
+        // Logout function for sidebar
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                fetch('/Webapp-Backend/logout', {
+                    method: 'GET'
+                })
+                .then(response => {
+                    localStorage.removeItem('userFullName');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    window.location.href = 'account/login.html';
+                });
+            }
+        }
+        </script>
+    </body>
+</html>
