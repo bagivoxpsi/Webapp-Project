@@ -1,4 +1,4 @@
-package com.webapp.servlet;
+package ProfilePackage;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

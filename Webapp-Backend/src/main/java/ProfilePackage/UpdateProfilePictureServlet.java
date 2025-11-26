@@ -1,4 +1,4 @@
-package com.webapp.servlet;
+package ProfilePackage;
 
 import com.webapp.util.DatabaseConnection;
 import jakarta.servlet.*;
