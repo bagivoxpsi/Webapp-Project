@@ -27,14 +27,9 @@ public class UserDAO {
     
     private static final String URL = "jdbc:mysql://localhost:3306/smart_home";
     private static final String USER = "root";
-    private static final String PASSWORD = "0000"; // replace
+    private static final String PASSWORD = "0000";
 
     private Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("MySQL driver not found in Tomcat/lib", e);
-        }
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
@@ -112,53 +107,65 @@ public class UserDAO {
     }
 
     public boolean updateUserEmail(int userId, String newEmail) throws Exception {
-        try (Connection conn = getConnection();
-             PreparedStatement checkStmt = conn.prepareStatement(CHECK_EMAIL_EXISTS)) {
+        System.out.println("[v0] updateUserEmail called - userId: " + userId + ", newEmail: " + newEmail);
+        
+        try (Connection conn = getConnection()) {
+            // Check if email already exists
+            try (PreparedStatement checkStmt = conn.prepareStatement(CHECK_EMAIL_EXISTS)) {
+                checkStmt.setString(1, newEmail);
+                checkStmt.setInt(2, userId);
+                ResultSet rs = checkStmt.executeQuery();
 
-            checkStmt.setString(1, newEmail);
-            checkStmt.setInt(2, userId);
-            ResultSet rs = checkStmt.executeQuery();
-
-            if (rs.next() && rs.getInt(1) > 0) {
-                throw new Exception("Email already exists");
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.out.println("[v0] Email already exists, throwing exception");
+                    throw new Exception("Email already exists");
+                }
             }
-        }
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_EMAIL)) {
+            // Update the email
+            try (PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_EMAIL)) {
+                stmt.setString(1, newEmail);
+                stmt.setInt(2, userId);
 
-            stmt.setString(1, newEmail);
-            stmt.setInt(2, userId);
-
-            return stmt.executeUpdate() > 0;
+                int rowsAffected = stmt.executeUpdate();
+                System.out.println("[v0] Email update - rows affected: " + rowsAffected);
+                return rowsAffected > 0;
+            }
         }
     }
 
     public boolean updateUserPassword(int userId, String oldPassword, String newPassword) throws Exception {
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_ID)) {
+        System.out.println("[v0] updateUserPassword called - userId: " + userId);
+        
+        try (Connection conn = getConnection()) {
+            // Verify old password
+            try (PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_ID)) {
+                stmt.setInt(1, userId);
+                ResultSet rs = stmt.executeQuery();
 
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    String storedPassword = rs.getString("password");
+                    System.out.println("[v0] Stored password: " + storedPassword + ", Old password provided: " + oldPassword);
 
-            if (rs.next()) {
-                String storedPassword = rs.getString("password");
-
-                if (!storedPassword.equals(oldPassword)) {
-                    throw new Exception("Current password is incorrect");
+                    if (!storedPassword.equals(oldPassword)) {
+                        System.out.println("[v0] Password mismatch, throwing exception");
+                        throw new Exception("Current password is incorrect");
+                    }
+                } else {
+                    System.out.println("[v0] User not found");
+                    throw new Exception("User not found");
                 }
-            } else {
-                throw new Exception("User not found");
             }
-        }
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_PASSWORD)) {
+            // Update the password
+            try (PreparedStatement stmt = conn.prepareStatement(UPDATE_USER_PASSWORD)) {
+                stmt.setString(1, newPassword);
+                stmt.setInt(2, userId);
 
-            stmt.setString(1, newPassword);
-            stmt.setInt(2, userId);
-
-            return stmt.executeUpdate() > 0;
+                int rowsAffected = stmt.executeUpdate();
+                System.out.println("[v0] Password update - rows affected: " + rowsAffected);
+                return rowsAffected > 0;
+            }
         }
     }
 }
