@@ -51,7 +51,7 @@ document.getElementById("delete-account-btn").addEventListener("click", async ()
     if (data.status === "success") {
       alert("Your account has been successfully deleted. You will now be redirected to the login page.")
       localStorage.clear()
-      window.location.href = "account/index.html"
+      window.location.href = "account/login.html"
     } else {
       alert("Failed to delete account: " + data.message)
     }
