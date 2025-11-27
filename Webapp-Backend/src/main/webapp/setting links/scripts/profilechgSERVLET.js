@@ -1,4 +1,4 @@
-console.log("[v0] profilechgSERVLET.js loaded") //just needed to track in console if connected to js and servlet
+console.log("profilechgSERVLET.js loaded") //just needed to track in console if connected to js and servlet
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("age").value = userAge
   }
 
-  console.log(" Loaded profile data from localStorage")
+  console.log("Loaded profile data from localStorage")
 })
 
 

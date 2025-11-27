@@ -6,16 +6,16 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 })
 
-console.log("[v0] password-email-chg.js loaded")
+console.log("password-email-chg.js loaded")
 
 
 document.getElementById("email-form").addEventListener("submit", async (e) => {
-  console.log("[v0] Email form submitted")
+  console.log("Email form submitted")
   e.preventDefault()
 
   const newEmail = document.getElementById("new-email").value.trim()
 
-  console.log("[v0] New email:", newEmail)
+  console.log("New email:", newEmail)
 
   if (!newEmail) {
     alert("Please enter a new email address!")
@@ -30,7 +30,7 @@ document.getElementById("email-form").addEventListener("submit", async (e) => {
   }
 
   try {
-    console.log("[v0] Sending email change request to:", "/Webapp-Backend/changeEmail") //just needed to track in console if connected to js and servlet
+    console.log("Sending email change request to:", "/Webapp-Backend/changeEmail") //just needed to track in console if connected to js and servlet
 
     const response = await fetch("/Webapp-Backend/changeEmail", {
       method: "POST",
@@ -41,11 +41,11 @@ document.getElementById("email-form").addEventListener("submit", async (e) => {
       body: JSON.stringify({ newEmail }),
     })
 
-    console.log("[v0] Email change response status:", response.status)
+    console.log("Email change response status:", response.status)
 
     const data = await response.json()
 
-    console.log("[v0] Email change response data:", data)
+    console.log("Email change response data:", data)
 
     if (data.status === "success") {
  
@@ -58,14 +58,14 @@ document.getElementById("email-form").addEventListener("submit", async (e) => {
       alert(data.message || "Failed to update email")
     }
   } catch (error) {
-    console.error("[v0] Email update error:", error)
+    console.error("Email update error:", error)
     alert("An error occurred while updating email")
   }
 })
 
 // Handle password form submission
 document.getElementById("password-form").addEventListener("submit", async (e) => {
-  console.log("[v0] Password form submitted")
+  console.log("Password form submitted")
   e.preventDefault()
 
   const currentPassword = document.getElementById("current-password").value
@@ -93,7 +93,7 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
   }
 
   try {
-    console.log("[v0] Sending password change request to:", "/Webapp-Backend/changePassword")
+    console.log("Sending password change request to:", "/Webapp-Backend/changePassword")
 
     const response = await fetch("/Webapp-Backend/changePassword", {
       method: "POST",
@@ -107,11 +107,11 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
       }),
     })
 
-    console.log("[v0] Password change response status:", response.status)
+    console.log("Password change response status:", response.status)
 
     const data = await response.json()
 
-    console.log("[v0] Password change response data:", data)
+    console.log("Password change response data:", data)
 
     if (data.status === "success") {
       alert("Password updated successfully!")
@@ -121,9 +121,9 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
       alert(data.message || "Failed to update password")
     }
   } catch (error) {
-    console.error("[v0] Password update error:", error)
+    console.error("Password update error:", error)
     alert("An error occurred while updating password")
   }
 })
 
-console.log("[v0] Event listeners attached to email-form and password-form")
+console.log("Event listeners attached to email-form and password-form")

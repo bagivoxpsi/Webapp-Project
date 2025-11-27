@@ -109,7 +109,7 @@ public class ProfileDAO {
     }
 
     public boolean updateUserEmail(int userId, String newEmail) throws Exception {
-        System.out.println("[v0] updateUserEmail called - userId: " + userId + ", newEmail: " + newEmail);
+        System.out.println("updateUserEmail called - userId: " + userId + ", newEmail: " + newEmail);
         
         try (Connection conn = getConnection()) {
             try (PreparedStatement checkStmt = conn.prepareStatement(CHECK_EMAIL_EXISTS)) {
@@ -118,7 +118,7 @@ public class ProfileDAO {
                 ResultSet rs = checkStmt.executeQuery();
 
                 if (rs.next() && rs.getInt(1) > 0) {
-                    System.out.println("[v0] Email already exists, throwing exception");
+                    System.out.println("Email already exists, throwing exception");
                     throw new Exception("Email already exists");
                 }
             }
@@ -128,14 +128,14 @@ public class ProfileDAO {
                 stmt.setInt(2, userId);
 
                 int rowsAffected = stmt.executeUpdate();
-                System.out.println("[v0] Email update - rows affected: " + rowsAffected);
+                System.out.println("Email update - rows affected: " + rowsAffected);
                 return rowsAffected > 0;
             }
         }
     }
 
     public boolean updateUserPassword(int userId, String oldPassword, String newPassword) throws Exception {
-        System.out.println("[v0] updateUserPassword called - userId: " + userId);
+        System.out.println("updateUserPassword called - userId: " + userId);
         
         try (Connection conn = getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_ID)) {
@@ -144,14 +144,14 @@ public class ProfileDAO {
 
                 if (rs.next()) {
                     String storedPassword = rs.getString("password");
-                    System.out.println("[v0] Stored password: " + storedPassword + ", Old password provided: " + oldPassword);
+                    System.out.println("Stored password: " + storedPassword + ", Old password provided: " + oldPassword);
 
                     if (!storedPassword.equals(oldPassword)) {
-                        System.out.println("[v0] Password mismatch, throwing exception");
+                        System.out.println("Password mismatch, throwing exception");
                         throw new Exception("Current password is incorrect");
                     }
                 } else {
-                    System.out.println("[v0] User not found");
+                    System.out.println("User not found");
                     throw new Exception("User not found");
                 }
             }
@@ -161,14 +161,14 @@ public class ProfileDAO {
                 stmt.setInt(2, userId);
 
                 int rowsAffected = stmt.executeUpdate();
-                System.out.println("[v0] Password update - rows affected: " + rowsAffected);
+                System.out.println("Password update - rows affected: " + rowsAffected);
                 return rowsAffected > 0;
             }
         }
     }
     
     public boolean deleteUser(int userId) {
-        System.out.println("[v0] deleteUser called - userId: " + userId);
+        System.out.println("deleteUser called - userId: " + userId);
         
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(DELETE_USER)) {
@@ -176,11 +176,11 @@ public class ProfileDAO {
             stmt.setInt(1, userId);
             int rowsAffected = stmt.executeUpdate();
             
-            System.out.println("[v0] User deletion - rows affected: " + rowsAffected);
+            System.out.println("User deletion - rows affected: " + rowsAffected);
             return rowsAffected > 0;
             
         } catch (SQLException e) {
-            System.err.println("[v0] Error deleting user: " + e.getMessage());
+            System.err.println("Error deleting user: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
