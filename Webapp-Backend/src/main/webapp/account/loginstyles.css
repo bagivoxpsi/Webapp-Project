@@ -285,27 +285,3 @@ body{
 #alert-container {
   margin-bottom: 1rem;
 }
-
-@media (max-width: 768px) {
-  .login-card,
-  .signup-card {
-    padding: 1.5rem;
-  }
-
-  .page-title {
-    font-size: 2rem;
-  }
-
-  .card-title {
-    font-size: 1.5rem;
-  }
-
-  .custom-popup {
-    min-width: 250px;
-  }
-
-  .popup-container {
-    right: 10px;
-    left: 10px;
-  }
-}
