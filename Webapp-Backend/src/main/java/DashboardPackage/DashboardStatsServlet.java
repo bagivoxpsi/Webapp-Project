@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet("/api/dashboard/stats")
 public class DashboardStatsServlet extends HttpServlet {
-    
-    private DashboardDAO dashboardDAO = new DashboardDAO();
+	private static final long serialVersionUID = 1L;
+	private DashboardDAO dashboardDAO = new DashboardDAO();
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {

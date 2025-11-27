@@ -1,6 +1,9 @@
 package UserPackage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import AddressPackage.Address;
+import AddressPackage.AddressDAO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +16,8 @@ import java.util.Map;
 public class SignupServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private UserDAO userDAO = new UserDAO();
+    private ProfileDAO userDAO = new ProfileDAO();
+    private AddressDAO addressDAO = new AddressDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,10 +63,18 @@ public class SignupServlet extends HttpServlet {
             try {
                 userDAO.registerUser(user);
 
+             // Create "Primary Address" for user
+                Address primaryAddress = new Address();
+                primaryAddress.setUserId(user.getId());
+                primaryAddress.setAddress("Primary Address");
+                addressDAO.saveAddress(primaryAddress);
+                
                 // Create session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("email", user.getEmail());
+                session.setAttribute("userFullName", user.getFullName());
+                session.setAttribute("userAge", user.getAge());
 
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().write(mapper.writeValueAsString(Map.of(

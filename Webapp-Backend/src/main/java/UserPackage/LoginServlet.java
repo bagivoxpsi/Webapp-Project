@@ -14,7 +14,7 @@ import java.util.Map;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private UserDAO userDAO = new UserDAO();
+    private ProfileDAO userDAO = new ProfileDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

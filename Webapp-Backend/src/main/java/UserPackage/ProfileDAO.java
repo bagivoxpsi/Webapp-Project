@@ -2,7 +2,7 @@ package UserPackage;
 
 import java.sql.*;
 
-public class UserDAO {
+public class ProfileDAO {
 
     private static final String INSERT_USER =
         "INSERT INTO users (email, password, full_name, age) VALUES (?, ?, ?, ?)";

@@ -1,4 +1,4 @@
-package UserPackage;
+package ProfilePackage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/changePassword")
-public class ChangePasswordServlet extends HttpServlet {
+@WebServlet("/update-fullname")
+public class UpdateFullNameServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private ProfileDAO userDAO = new ProfileDAO();
+    private ProfileDAO profileDAO = new ProfileDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -23,7 +23,6 @@ public class ChangePasswordServlet extends HttpServlet {
         response.setContentType("application/json");
 
         try {
-            // Check if user is logged in
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("userId") == null) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -33,32 +32,23 @@ public class ChangePasswordServlet extends HttpServlet {
 
             int userId = (int) session.getAttribute("userId");
 
-            // Parse JSON request body
-            Map<String, String> passwordData = mapper.readValue(request.getReader(), Map.class);
-            String oldPassword = passwordData.get("oldPassword");
-            String newPassword = passwordData.get("newPassword");
-
-            if (oldPassword == null || newPassword == null) {
+            Map<String, Object> profileData = mapper.readValue(request.getReader(), Map.class);
+            String fullName = (String) profileData.get("fullName");
+            
+            if (fullName == null || fullName.trim().isEmpty()) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("{\"status\":\"error\",\"message\":\"Both old and new passwords are required\"}");
+                response.getWriter().write("{\"status\":\"error\",\"message\":\"Full name is required\"}");
                 return;
             }
 
-            if (newPassword.length() < 6) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("{\"status\":\"error\",\"message\":\"New password must be at least 6 characters\"}");
-                return;
-            }
-
-            // Update password
-            boolean updated = userDAO.updateUserPassword(userId, oldPassword, newPassword);
+            boolean updated = profileDAO.updateFullName(userId, fullName);
 
             if (updated) {
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("{\"status\":\"success\",\"message\":\"Password updated successfully\"}");
+                response.getWriter().write("{\"status\":\"success\",\"message\":\"Profile updated successfully\"}");
             } else {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("{\"status\":\"error\",\"message\":\"Failed to update password\"}");
+                response.getWriter().write("{\"status\":\"error\",\"message\":\"Failed to update profile\"}");
             }
 
         } catch (Exception e) {

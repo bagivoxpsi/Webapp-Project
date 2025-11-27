@@ -5,3 +5,11 @@ a {
 a .fa {
     color:inherit;
 }
+
+body.darkmode .text-muted{
+  color:var(--NAV-ITEM-COLOR) !important;
+}
+
+.card {
+  background-color: var(--NAV-BG);  
+}

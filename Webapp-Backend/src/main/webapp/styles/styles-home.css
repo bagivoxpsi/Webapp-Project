@@ -21,6 +21,18 @@
     height: min(300px, 30vh);
 }
 
+body.darkmode .text-muted{
+  color:var(--NAV-ITEM-COLOR) !important;
+}
+
+body.darkmode .fw-bold{
+	color: var(--NAV-ITEM-COLOR);	
+}
+
+.card {
+  background-color: var(--NAV-BG);  
+}
+
 .carousel-inner {
     border-radius: 20px;
     box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.299);

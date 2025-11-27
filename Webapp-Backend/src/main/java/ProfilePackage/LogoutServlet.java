@@ -1,4 +1,4 @@
-package com.webapp.servlet;
+package ProfilePackage;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -17,6 +17,6 @@ public class LogoutServlet extends HttpServlet {
         }
         
         // Redirect to login page
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/Webapp-Backend/account/login.html");
     }
 }

@@ -1,5 +1,4 @@
 package AddressPackage;
-import java.util.Map;
 
 public class Address {
 	private int addressId;	// primary key

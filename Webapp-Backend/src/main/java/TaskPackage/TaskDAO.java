@@ -85,5 +85,37 @@ public class TaskDAO {
             return stmt.executeUpdate() > 0;
         }
     }
+    
+    
+    public List<Task> getTop3TasksToday(int userId) throws Exception {
+        List<Task> tasks = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
+        String sql = "SELECT * FROM tasks " +
+                     "WHERE user_id = ? AND task_time >= CURRENT_TIME " +
+                     "ORDER BY task_time ASC LIMIT 3";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Task task = new Task();
+                task.setTaskId(rs.getInt("task_id"));
+                task.setUserId(rs.getInt("user_id"));
+                task.setDevice(rs.getString("device"));
+
+                String json = rs.getString("properties");
+                Map<String, String> props = mapper.readValue(json, Map.class);
+                task.setProperties(props);
+
+                task.setTaskTime(rs.getString("task_time"));
+
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
 }
